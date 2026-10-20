@@ -1,0 +1,97 @@
+@model QuanLyMonAn_BIT240257.Models.Dish_BIT240257
+
+@{
+    ViewData["Title"] = "Sửa món ăn";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning py-3">
+                    <h3 class="mb-0">CHỈNH SỬA MÓN ĂN</h3>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Edit" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" asp-for="BIT240257_DishId" />
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="BIT240257_DishName"
+                                   class="form-label">Tên món ăn</label>
+                            <input asp-for="BIT240257_DishName"
+                                   class="form-control" />
+                            <span asp-validation-for="BIT240257_DishName"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BIT240257_Price"
+                                   class="form-label">Giá bán (VNĐ)</label>
+                            <input asp-for="BIT240257_Price"
+                                   type="number"
+                                   min="0"
+                                   step="1000"
+                                   class="form-control" />
+                            <span asp-validation-for="BIT240257_Price"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BIT240257_Description"
+                                   class="form-label">Mô tả</label>
+                            <textarea asp-for="BIT240257_Description"
+                                      class="form-control"
+                                      rows="4"></textarea>
+                            <span asp-validation-for="BIT240257_Description"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BIT240257_ImageUrl"
+                                   class="form-label">Đường dẫn hình ảnh</label>
+                            <input asp-for="BIT240257_ImageUrl"
+                                   class="form-control" />
+                            <span asp-validation-for="BIT240257_ImageUrl"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="BIT240257_CategoryId"
+                                   class="form-label">Danh mục</label>
+                            <select asp-for="BIT240257_CategoryId"
+                                    class="form-select"
+                                    asp-items="ViewBag.BIT240257_CategoryId">
+                                <option value="">-- Chọn danh mục --</option>
+                            </select>
+                            <span asp-validation-for="BIT240257_CategoryId"
+                                  class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-warning">
+                                Lưu thay đổi
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-outline-secondary">
+                                Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

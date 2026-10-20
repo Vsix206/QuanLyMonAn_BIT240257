@@ -1,0 +1,68 @@
+﻿@model QuanLyMonAn_BIT240257.Models.DishCategory_BIT240257
+
+@{
+    ViewData["Title"] = "Xóa danh mục";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-danger text-white py-3">
+                    <h3 class="mb-0">XÁC NHẬN XÓA DANH MỤC</h3>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="alert alert-warning">
+                        Bạn có chắc chắn muốn xóa danh mục này không?
+                    </div>
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3"></div>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Mã danh mục</dt>
+                        <dd class="col-sm-8">
+                            @Model.BIT240257_CategoryId
+                        </dd>
+
+                        <dt class="col-sm-4">Tên danh mục</dt>
+                        <dd class="col-sm-8 fw-semibold">
+                            @Model.BIT240257_CategoryName
+                        </dd>
+
+                        <dt class="col-sm-4">Mô tả</dt>
+                        <dd class="col-sm-8">
+                            @Model.BIT240257_Description
+                        </dd>
+
+                        <dt class="col-sm-4">Số món ăn</dt>
+                        <dd class="col-sm-8">
+                            @(Model.Dishes?.Count ?? 0)
+                        </dd>
+                    </dl>
+
+                    <form asp-action="Delete" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               asp-for="BIT240257_CategoryId" />
+
+                        <div class="d-flex gap-2">
+                            <button type="submit"
+                                    class="btn btn-danger"
+                                    onclick="return confirm('Bạn chắc chắn muốn xóa danh mục này?');">
+                                Xác nhận xóa
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-outline-secondary">
+                                Hủy
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

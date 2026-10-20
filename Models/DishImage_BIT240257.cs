@@ -1,0 +1,1 @@
+public bool IsThumbnail { get; set; }

@@ -1,0 +1,66 @@
+@model QuanLyMonAn_BIT240257.Models.Dish_BIT240257
+
+@{
+    ViewData["Title"] = "Xóa món ăn";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-danger text-white py-3">
+                    <h3 class="mb-0">XÁC NHẬN XÓA MÓN ĂN</h3>
+                </div>
+
+                <div class="card-body p-4">
+                    <div class="alert alert-warning">
+                        Bạn có chắc chắn muốn xóa món ăn này không?
+                        Thao tác này không thể hoàn tác.
+                    </div>
+
+                    <dl class="row">
+                        <dt class="col-sm-4">Tên món ăn</dt>
+                        <dd class="col-sm-8">
+                            @Model.BIT240257_DishName
+                        </dd>
+
+                        <dt class="col-sm-4">Giá bán</dt>
+                        <dd class="col-sm-8">
+                            @Model.BIT240257_Price.ToString("N0") đ
+                        </dd>
+
+                        <dt class="col-sm-4">Mô tả</dt>
+                        <dd class="col-sm-8">
+                            @Model.BIT240257_Description
+                        </dd>
+
+                        <dt class="col-sm-4">Danh mục</dt>
+                        <dd class="col-sm-8">
+                            @(Model.Category?.BIT240257_CategoryName ?? "Chưa phân loại")
+                        </dd>
+                    </dl>
+
+                    <form asp-action="Delete" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               asp-for="BIT240257_DishId" />
+
+                        <div class="d-flex gap-2">
+                            <button type="submit"
+                                    class="btn btn-danger"
+                                    onclick="return confirm('Bạn chắc chắn muốn xóa món ăn này?');">
+                                Xác nhận xóa
+                            </button>
+
+                            <a asp-action="Index"
+                               class="btn btn-outline-secondary">
+                                Hủy
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

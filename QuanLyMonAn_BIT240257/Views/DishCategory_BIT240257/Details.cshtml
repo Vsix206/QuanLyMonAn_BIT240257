@@ -1,0 +1,83 @@
+﻿@model QuanLyMonAn_BIT240257.Models.DishCategory_BIT240257
+
+@{
+    ViewData["Title"] = "Chi tiết danh mục";
+}
+
+<div class="container mt-4 mb-5">
+    <h2 class="mb-4">Chi tiết danh mục món ăn</h2>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            Thông tin danh mục
+        </div>
+
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Mã danh mục</dt>
+                <dd class="col-sm-9">
+                    @Model.BIT240257_CategoryId
+                </dd>
+
+                <dt class="col-sm-3">Tên danh mục</dt>
+                <dd class="col-sm-9">
+                    @Model.BIT240257_CategoryName
+                </dd>
+
+                <dt class="col-sm-3">Mô tả</dt>
+                <dd class="col-sm-9">
+                    @(string.IsNullOrWhiteSpace(Model.BIT240257_Description)
+                        ? "Chưa có mô tả"
+                        : Model.BIT240257_Description)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+    <h4 class="mt-4 mb-3">Danh sách món ăn thuộc danh mục</h4>
+
+    @if (Model.Dishes != null && Model.Dishes.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Mã món ăn</th>
+                        <th>Tên món ăn</th>
+                        <th>Giá</th>
+                        <th>Mô tả</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var dish in Model.Dishes)
+                    {
+                        <tr>
+                            <td>@dish.BIT240257_DishId</td>
+                            <td>@dish.BIT240257_DishName</td>
+                            <td>@dish.BIT240257_Price.ToString("N0") VNĐ</td>
+                            <td>@dish.BIT240257_Description</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Danh mục này hiện chưa có món ăn nào.
+        </div>
+    }
+
+    <div class="mt-3">
+        <a asp-action="Edit"
+           asp-route-id="@Model.BIT240257_CategoryId"
+           class="btn btn-warning">
+            Sửa danh mục
+        </a>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Quay lại danh sách
+        </a>
+    </div>
+</div>
